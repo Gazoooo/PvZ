@@ -2,7 +2,10 @@
 #define ZOMBIE_HPP
 
 
-
+/**
+ * @class Zombie
+ * @brief Represents a zombie in the game, with attributes like health, damage, and the ability to move.
+ */
 class Zombie{
     
     public:
@@ -18,14 +21,25 @@ class Zombie{
         int bildgröße = 80;
         int timer = 0; //for attacking plants
         
-        int slowtimer = 0; //im Moment nicht gebraucht
+        int slowtimer = 0; // not used yet
     
     public:
 
+        /**
+         * @brief Destructor to clean up dynamically allocated resources (zombie image).
+         */
         ~ Zombie() {
             delete z;
         }
-    
+        
+        /**
+         * @brief Constructor to initialize a zombie object with a specific name, position, and optional garden reference.
+         * 
+         * @param name Name of the zombie (e.g., "normal_zombie", "cone_zombie")
+         * @param x X coordinate for the zombie's position
+         * @param y Y coordinate for the zombie's position
+         * @param garten Optional SVG reference for the garden where the zombie is placed
+         */
         Zombie(string name, int x, int y, SVG* garten = nullptr) {
             
             this->y = y;
@@ -47,22 +61,42 @@ class Zombie{
             }
         }
         
+         /**
+         * @brief Moves the zombie to the left by its move speed.
+         * 
+         * This method updates both the zombie's position and its image.
+         */
         void move(){
             this-> x -= moveSpeed;
             z -> moveBy(-moveSpeed,0);
              
         }
         
+        /**
+         * @brief Reduces the zombie's health by the given damage amount.
+         * 
+         * @param damage The amount of damage to subtract from the zombie's health
+         */
         void hit(int damage){
             this-> hp -= damage;
          }
 
+         /**
+         * @brief Slows down the zombie by reducing its movement speed.
+         */
          void slow(){
             this->slowed = true;
             this-> moveSpeed -= 3;
        }
 
-       void accelerate (){ //im Moment nicht gebraucht
+       /**
+     * @brief Resets the zombie's speed back to normal after it has been slowed.
+     * 
+     * This method checks if the zombie is slowed and, after a certain time, resets its speed.
+     * 
+     * @note Currently unused in the game logic.
+     */
+       void accelerate (){
             if (this->slowed){
                 if (slowtimer == 50) {
                     this->slowed = false;
