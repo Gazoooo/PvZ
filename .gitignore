@@ -9,7 +9,12 @@
 __pycache__/             
 *.pyc                    
 *.pyo                   
-*.pyd                    
+*.pyd    
+
+# ==========================
+# Jupyter Notebook
+# ==========================
+.ipynb_checkpoints/
 
 # ==========================
 # Virtual Environments
